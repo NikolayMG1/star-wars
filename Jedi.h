@@ -15,10 +15,10 @@ class Jedi{
 
     public:
     Jedi();
-    Jedi(const char*, const char*, Ranks, unsigned, char*, double);
+    Jedi(const char*, const char*, Ranks, unsigned,const char*, double);
     Jedi(const Jedi&);
     Jedi& operator=(const Jedi&);
     ~Jedi();
     friend std::ostream& operator<<(std::ostream&, const Jedi&);
-    friend std::istream& operator >> (std::istream& in,  Jedi& date);
+    friend std::istream& operator >> (std::istream& in,  Jedi&);
 };

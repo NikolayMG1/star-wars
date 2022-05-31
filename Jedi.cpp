@@ -9,7 +9,7 @@ Jedi::Jedi(){
     this->origin = nullptr;
     this->rank = UNKNOWN;
 }
-Jedi::Jedi(const char* origin, const char* name, Ranks rank, unsigned age, char* saberColor, double strength){
+Jedi::Jedi(const char* origin, const char* name, Ranks rank, unsigned age,const char* saberColor, double strength){
     this->origin = new char[strlen(origin)+1];
     strcpy(this->origin, origin);
     this->name = new char[strlen(name)+1];
@@ -51,12 +51,17 @@ void Jedi::copy(const Jedi& other){
 
 std::istream& operator>>(std::istream& in,  Jedi& jedi){
     int i;
+    char temp[1024];
+    jedi.free();
     std::cout << "Enter the origin: ";
-    in >> jedi.origin; 
+    in >> temp;
+    jedi.origin = new char[strlen(temp)+1];
+    strcpy(jedi.origin, temp);
     std::cout << "Enter the name: ";
-    in >> jedi.name;
+    in >> temp;
+    jedi.name = new char[strlen(temp)+1];
+    strcpy(jedi.name, temp);
     std::cout << "Enter the rank: ";
-    in >> i;
     std::cout << "Enter 1 for YOUNGLING" << '\n';
     std::cout << "Enter 2 for INITIATE" << '\n';
     std::cout << "Enter 3 for PADAWAN" << '\n';
@@ -65,6 +70,7 @@ std::istream& operator>>(std::istream& in,  Jedi& jedi){
     std::cout << "Enter 6 for MASTER" << '\n';
     std::cout << "Enter 7 for BATTLE_MASTER" << '\n';
     std::cout << "Enter 8 for GRAND_MASTER" << '\n';
+    in >> i;
     switch (i){
     case 1:
         jedi.rank = YOUNGLING;
@@ -96,7 +102,9 @@ std::istream& operator>>(std::istream& in,  Jedi& jedi){
     std::cout << "Enter the age: ";
     in >> jedi.age;
     std::cout << "Enter the color of the saber: ";
-    in >> jedi.saberColor;  
+    in >> temp;
+    jedi.saberColor = new char[strlen(temp)+1];
+    strcpy(jedi.saberColor, temp);
     std::cout << "Enter the strength: ";
     in >> jedi.strength;    
     return in;

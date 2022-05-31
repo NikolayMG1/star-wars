@@ -6,6 +6,8 @@ class Galaxy{
     unsigned size = 0;
     unsigned capacity = 20;
     public:
-    Galaxy(const Planet&,unsigned);
+    Galaxy();
+    Galaxy(const Planet&);
     void add_planet(const Planet&);
+    void resize();
 };
