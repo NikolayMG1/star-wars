@@ -1,7 +1,7 @@
 #pragma once
 #include "Ranks.h"
 #include <iostream>
-
+#pragma warning(disable : 4996)
 class Jedi{
     private:
     char* name;
@@ -21,4 +21,5 @@ class Jedi{
     ~Jedi();
     friend std::ostream& operator<<(std::ostream&, const Jedi&);
     friend std::istream& operator >> (std::istream& in,  Jedi&);
+    char* getOrigin() const;
 };

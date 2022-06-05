@@ -40,6 +40,8 @@ void Jedi::free(){
     delete[] origin;
 }
 void Jedi::copy(const Jedi& other){
+    this->origin = new char[strlen(other.origin)+1];
+    strcpy(this->origin,other.origin);
     this->age = other.age;
     this->name = new char[strlen(other.name)+1];
     strcpy(this->name,other.name);
@@ -118,4 +120,8 @@ std::ostream& operator<<(std::ostream& out, const Jedi& jedi){
     out <<"SaberColor: " << jedi.saberColor << '\n';
     out <<"Strength: " << jedi.strength << '\n';
     return out;
+}
+
+char* Jedi::getOrigin() const{
+    return origin;
 }

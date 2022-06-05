@@ -46,17 +46,23 @@ void Planet::resize(){
     jedies = temp;
 }
 void Planet::create_jedi(const char* namePlanet, const Jedi& Newjedi){
-    this->namePlanet = new char[strlen(namePlanet)+1];
-    strcpy(this->namePlanet, namePlanet);
-    this->jedies = new Jedi[capacity];
-    if(size >= capacity){
-        resize();
+
+    if(!strcmp(namePlanet,Newjedi.getOrigin())){
+        this->namePlanet = new char[strlen(namePlanet)+1];
+        strcpy(this->namePlanet, namePlanet);
+        this->jedies = new Jedi[capacity];
+        if(size >= capacity){
+            resize();
+        }
+        this->jedies[size++] = Newjedi;
     }
-    this->jedies[size++] = Newjedi;
+    else{
+        std::cout << "Jedi already exists";
+    }
 }
 std::ostream& operator<<(std::ostream& out, const Planet& planet){
     out << "Planet name: " << planet.namePlanet << '\n';
-    for(int i = 0; i < planet.capacity; i++){
+    for(int i = 0; i < planet.size; i++){
         out << "Jedi " << i+1 << ": " << planet.jedies[i] << '\n';
     }
     return out;

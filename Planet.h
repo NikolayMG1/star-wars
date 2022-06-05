@@ -1,6 +1,6 @@
 #pragma once
 #include "Jedi.h"
-
+#pragma warning(disable : 4996)
 class Planet{
     private:
     char* namePlanet;
