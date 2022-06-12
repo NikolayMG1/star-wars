@@ -13,6 +13,9 @@ class Galaxy{
     public:
     Galaxy();
     Galaxy(const Planet&);
+    Galaxy& operator=(const Galaxy&);
+    bool operator==(const Galaxy&);
+    ~Galaxy();
     void add_planet(const Planet&);
     void resize();
     friend std::ostream& operator<<(std::ostream& out, const Galaxy&);

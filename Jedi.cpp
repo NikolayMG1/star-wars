@@ -113,7 +113,7 @@ std::istream& operator>>(std::istream& in,  Jedi& jedi){
 }
 std::ostream& operator<<(std::ostream& out, const Jedi& jedi){
     out << '\n';
-    out <<"Origin: " << jedi.origin << '\n';
+    //out <<"Origin: " << jedi.origin << '\n';
     out <<"Name: " << jedi.name << '\n';
     out <<"Rank: " << jedi.rank << '\n';
     out <<"Age: " << jedi.age << '\n';
@@ -124,4 +124,8 @@ std::ostream& operator<<(std::ostream& out, const Jedi& jedi){
 
 char* Jedi::getOrigin() const{
     return origin;
+}
+
+char* Jedi::getName() const{
+    return name;
 }

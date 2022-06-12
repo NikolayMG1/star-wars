@@ -13,7 +13,7 @@ class Planet{
 
     public:
     Planet();
-    Planet(const char* namePlanet, const Jedi&);
+    Planet(const char* namePlanet);
     Planet(const Planet&);
     Planet& operator=(const Planet&);
     ~Planet();
@@ -21,5 +21,6 @@ class Planet{
     void add_planet(const Planet& planet);
     friend std::ostream& operator<<(std::ostream&, const Planet&);
     friend std::istream& operator >> (std::istream& in,  Planet&);
-
+    void removeJedi(const char*, const Jedi&);//removes jedi
+    char* getName()const;
 };

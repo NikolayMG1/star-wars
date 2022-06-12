@@ -5,11 +5,10 @@ Planet::Planet(){
     this->namePlanet = nullptr;
     this->jedies = new Jedi[capacity];
 }
-Planet::Planet(const char* namePlanet, const Jedi& jedi){
+Planet::Planet(const char* namePlanet){
     this->namePlanet = new char[strlen(namePlanet)+1];
     strcpy(this->namePlanet, namePlanet);
     this->jedies = new Jedi[capacity];
-    this->jedies[size] = jedi;
 }
 Planet::Planet(const Planet& other){
     copy(other);
@@ -36,6 +35,7 @@ void Planet::copy(const Planet& other){
     for(size_t i = 0; i < size; i++){
         this->jedies[i] = other.jedies[i];
     }
+    this->capacity = other.capacity;
 }
 void Planet::resize(){
     Jedi* temp = new Jedi[capacity*=2];
@@ -46,22 +46,35 @@ void Planet::resize(){
     jedies = temp;
 }
 void Planet::create_jedi(const char* namePlanet, const Jedi& Newjedi){
-
     if(!strcmp(namePlanet,Newjedi.getOrigin())){
+        delete[] this->namePlanet;
         this->namePlanet = new char[strlen(namePlanet)+1];
         strcpy(this->namePlanet, namePlanet);
-        this->jedies = new Jedi[capacity];
         if(size >= capacity){
             resize();
         }
         this->jedies[size++] = Newjedi;
+        std::cout << Newjedi.getName() << " was added successfully" << '\n';
     }
     else{
         std::cout << "Jedi already exists";
     }
 }
+void Planet::removeJedi(const char* namePlanet, const Jedi& Newjedi){
+
+    if(!strcmp(namePlanet,Newjedi.getOrigin())){
+        delete[] this->namePlanet;
+        this->namePlanet = new char[strlen(namePlanet)+1];
+        
+        std::cout << Newjedi.getName() << " was removed successfully" << '\n';
+        size--;
+    }
+    else{
+        std::cout << "Jedi doesn't exists on this planet";
+    }
+}
 std::ostream& operator<<(std::ostream& out, const Planet& planet){
-    out << "Planet name: " << planet.namePlanet << '\n';
+    out << planet.namePlanet << '\n';
     for(int i = 0; i < planet.size; i++){
         out << "Jedi " << i+1 << ": " << planet.jedies[i] << '\n';
     }
@@ -76,8 +89,12 @@ std::istream& operator>>(std::istream& in, Planet& planet){
     planet.namePlanet = new char[strlen(temp)+1];
     strcpy(planet.namePlanet, temp);
     std::cout << "Enter a jedi: ";
-    for(int i = 0; i < planet.capacity; i++){
+    for(int i = 0; i < planet.size; i++){
         in >> planet.jedies[i];
     }
     return in;
+}
+
+char* Planet::getName() const{
+    return this->namePlanet;
 }

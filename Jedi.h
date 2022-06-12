@@ -22,4 +22,5 @@ class Jedi{
     friend std::ostream& operator<<(std::ostream&, const Jedi&);
     friend std::istream& operator >> (std::istream& in,  Jedi&);
     char* getOrigin() const;
+    char* getName() const;
 };
