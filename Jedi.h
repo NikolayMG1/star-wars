@@ -23,4 +23,8 @@ class Jedi{
     friend std::istream& operator >> (std::istream& in,  Jedi&);
     char* getOrigin() const;
     char* getName() const;
+    double getPower() const;
+    Ranks getRank() const;
+    void setRank(const Ranks&);
+    void setPower(const double);
 };

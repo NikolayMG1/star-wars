@@ -113,9 +113,38 @@ std::istream& operator>>(std::istream& in,  Jedi& jedi){
 }
 std::ostream& operator<<(std::ostream& out, const Jedi& jedi){
     out << '\n';
-    //out <<"Origin: " << jedi.origin << '\n';
+    out <<"Origin: " << jedi.origin << '\n';
     out <<"Name: " << jedi.name << '\n';
-    out <<"Rank: " << jedi.rank << '\n';
+    out <<"Rank: ";
+    switch (jedi.rank){
+    case 1:
+        out << "YOUNGLING";
+        break;
+    case 2:
+        out << "INITIATE";
+        break;
+    case 3:
+        out << "PADAWAN";
+        break;
+    case 4:
+        out <<  "KNIGHT_ASPIRANT";
+        break;
+    case 5:
+        out <<  "KNIGHT";
+        break;
+    case 6:
+        out << "MASTER";
+        break;
+    case 7:
+        out <<  "BATTLE_MASTER";
+        break;
+    case 8:
+        out <<  "GRAND_MASTER";
+        break;
+    default:
+        break;
+    }
+    out << '\n';
     out <<"Age: " << jedi.age << '\n';
     out <<"SaberColor: " << jedi.saberColor << '\n';
     out <<"Strength: " << jedi.strength << '\n';
@@ -125,7 +154,21 @@ std::ostream& operator<<(std::ostream& out, const Jedi& jedi){
 char* Jedi::getOrigin() const{
     return origin;
 }
-
+double Jedi::getPower() const{
+    return strength;
+}
 char* Jedi::getName() const{
     return name;
+}
+
+Ranks Jedi::getRank() const{
+    return rank;
+}
+
+void Jedi::setRank(const Ranks& rank){
+    this->rank = rank;
+}
+
+void Jedi::setPower(const double strength){
+    this->strength = strength;
 }
