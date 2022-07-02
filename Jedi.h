@@ -12,8 +12,9 @@ class Jedi{
     char* origin;
     void free();
     void copy(const Jedi&);
-
+    
     public:
+    void printOnConsole();
     Jedi();
     Jedi(const char*, const char*, Ranks, unsigned,const char*, double);
     Jedi(const Jedi&);

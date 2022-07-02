@@ -26,4 +26,6 @@ class Planet{
     char* getName()const;
     void demote_jedi(const char*, const double multiplier);//demoted a jedi
     void getStrongestJedi() const;//gets the strongest jedi
+    void printOnConsole();
+    void printCommand(Planet& planet);
 };

@@ -49,28 +49,34 @@ void Jedi::copy(const Jedi& other){
     this->saberColor = new char[strlen(other.saberColor)+1];
     strcpy(this->saberColor,other.saberColor);
 }
+void Jedi::printOnConsole(){
+    std::cout << "Enter the origin, name, rank " << '\n';
+    // std::cout << "Enter the name, " << '\n';
+    // std::cout << "Enter the rank, " << '\n';
+    std::cout << "-Enter 0 for YOUNGLING" << '\n';
+    std::cout << "-Enter 1 for INITIATE" << '\n';
+    std::cout << "-Enter 2 for PADAWAN" << '\n';
+    std::cout << "-Enter 3 for KNIGHT_ASPIRANT" << '\n';
+    std::cout << "-Enter 4 for KNIGHT" << '\n';
+    std::cout << "-Enter 5 for MASTER" << '\n';
+    std::cout << "-Enter 6 for BATTLE_MASTER" << '\n';
+    std::cout << "-Enter 7 for GRAND_MASTER" << '\n';
 
-std::istream& operator>>(std::istream& in,  Jedi& jedi){
+    // std::cout << "Enter the color of the saber, " << '\n';
+    // std::cout << "Enter the strength " << '\n';
+        std::cout << "Enter the age, saber, strength " << '\n';
+}
+
+std::istream& operator>>(std::istream& in,Jedi& jedi){
     int i;
     char temp[1024];
     jedi.free();
-    std::cout << "Enter the origin: ";
     in >> temp;
     jedi.origin = new char[strlen(temp)+1];
     strcpy(jedi.origin, temp);
-    std::cout << "Enter the name: ";
     in >> temp;
     jedi.name = new char[strlen(temp)+1];
     strcpy(jedi.name, temp);
-    std::cout << "Enter the rank: ";
-    std::cout << "Enter 1 for YOUNGLING" << '\n';
-    std::cout << "Enter 2 for INITIATE" << '\n';
-    std::cout << "Enter 3 for PADAWAN" << '\n';
-    std::cout << "Enter 4 for KNIGHT_ASPIRANT" << '\n';
-    std::cout << "Enter 5 for KNIGHT" << '\n';
-    std::cout << "Enter 6 for MASTER" << '\n';
-    std::cout << "Enter 7 for BATTLE_MASTER" << '\n';
-    std::cout << "Enter 8 for GRAND_MASTER" << '\n';
     in >> i;
     switch (i){
     case 1:
@@ -100,13 +106,10 @@ std::istream& operator>>(std::istream& in,  Jedi& jedi){
     default:
         break;
     }
-    std::cout << "Enter the age: ";
     in >> jedi.age;
-    std::cout << "Enter the color of the saber: ";
     in >> temp;
     jedi.saberColor = new char[strlen(temp)+1];
     strcpy(jedi.saberColor, temp);
-    std::cout << "Enter the strength: ";
     in >> jedi.strength;    
     return in;
 }
@@ -115,7 +118,7 @@ std::ostream& operator<<(std::ostream& out, const Jedi& jedi){
     out <<"Origin: " << jedi.origin << '\n';
     out <<"Name: " << jedi.name << '\n';
     out <<"Rank: ";
-    switch (jedi.rank){
+    switch (jedi.getRank()){
     case 1:
         out << "YOUNGLING";
         break;

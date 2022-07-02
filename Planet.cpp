@@ -117,7 +117,7 @@ void Planet::demote_jedi(const char *jediName, const double multiplier)
 {
     if (multiplier < 0)
     {
-        std::cout << "multiplier must be a positive number";
+        throw "multiplier must be a positive number";
     }
     else
     {
@@ -167,7 +167,7 @@ void Planet::promote_jedi(const char *jediName, const double multiplier)
 {
     if (multiplier < 0)
     {
-        std::cout << "multiplier must be a positive number";
+        throw "multiplier must be a positive number";
     }
     else
     {
@@ -224,16 +224,18 @@ std::ostream &operator<<(std::ostream &out, const Planet &planet)
     }
     return out;
 }
-
+void Planet::printOnConsole(){
+    std::cout << "Enter the planet name: " << '\n';
+    std::cout << "Enter a jedi: ";
+}
 std::istream &operator>>(std::istream &in, Planet &planet)
 {
     planet.free();
     char temp[1024];
-    std::cout << "Enter the planet name: ";
     in >> temp;
     planet.namePlanet = new char[strlen(temp) + 1];
     strcpy(planet.namePlanet, temp);
-    std::cout << "Enter a jedi: ";
+    
     for (int i = 0; i < planet.size; i++)
     {
         in >> planet.jedies[i];
@@ -269,4 +271,105 @@ void Planet::getStrongestJedi() const
     }
     std::cout << '\n'
               << buffer << " is the strongest Jedi" << '\n';
+}
+
+void Planet::printCommand(Planet& planet){
+    int x;
+    std::cout << '\n';
+    std::cout <<"to create a jedi type 1" <<'\n';
+    std::cout <<"to remove jedi type 2" <<'\n'; 
+    std::cout <<"to promote jedi type 3" <<'\n'; 
+    std::cout <<"to demote jedi type 4" <<'\n'; 
+    std::cout <<"to find the stongest jedi type 5" <<'\n'; 
+    std::cout <<"to end the program and print all jedies type 6" <<'\n';
+    std::cin >> x;
+
+
+    if(x == 1){
+        Jedi jedi;
+        jedi.printOnConsole();
+        std::cin >> jedi;
+        bool exists = false;
+        for(int i = 0; i < size; i++){
+            if(!strcmp(jedi.getName(),jedies[i].getName())){
+                exists = true;
+            }
+        }
+        std::cout << '\n';
+        if(!exists){
+            planet.create_jedi(jedi.getOrigin(), jedi);
+        }
+        else{
+            std::cout << jedi.getName() << "already exists";
+        }
+    }
+    else if(x == 2){
+        Jedi jedi;
+        jedi.printOnConsole();
+        std::cin >> jedi;
+        
+        bool exists = false;
+        for(int i = 0; i < size; i++){
+            if(!strcmp(jedi.getName(),jedies[i].getName())){
+                //std::cout << jedi.getName() << " removed";
+                planet.removeJedi(jedi.getName(), jedi);
+                exists = true;
+            }
+        }
+        std::cout << '\n';
+        if(!exists){
+            std::cout << jedi.getName() << " doesnt exist";
+        }
+    }
+    else if(x == 3){
+        Jedi jedi;
+        jedi.printOnConsole();
+        std::cin >> jedi;
+        
+        //bool exists = false;
+        for(int i = 0; i < size; i++){
+            if(!strcmp(jedi.getName(),jedies[i].getName())){
+                //std::cout << jedi.getName() << " removed";
+                planet.promote_jedi(jedies[i].getName(),1);
+                std::cout << jedi << "promoted successfully";
+                //std::cout << jedi;
+                //exists = true;
+            }
+        }
+        // std::cout << '\n';
+        // if(!exists){
+        //     std::cout << jedi.getName() << " max rank";
+        // }
+    }
+    else if(x == 4){
+        Jedi jedi;
+        jedi.printOnConsole();
+        std::cin >> jedi;
+        
+        //bool exists = false;
+        for(int i = 0; i < size; i++){
+            if(!strcmp(jedi.getName(),jedies[i].getName())){
+                //std::cout << jedi.getName() << " removed";
+                std::cout << jedi << "demoted successfully" << '\n';
+                planet.demote_jedi(jedi.getName(),1);
+                //std::cout << jedi;
+                //exists = true;
+            }
+        }
+        // std::cout << '\n';
+        // if(!exists){
+        //     std::cout << jedi.getName() << " max rank";
+        // }
+    }
+    else if(x == 5){
+        planet.getStrongestJedi();
+    }
+    else if(x == 6){
+        for(int i = 0; i < size; i++){
+            std::cout << planet.jedies[i];
+        }
+        std::cout << "Program completed";
+        return;
+    }
+    printCommand(planet);
 }

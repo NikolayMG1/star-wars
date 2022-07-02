@@ -22,7 +22,7 @@ void Galaxy::add_planet(const Planet& planet){
         this->planets[size++] = planet; 
     }
     else{
-        //std::cout << planet.getName() << " already exists" << '\n';
+        std::cout << planet.getName() << " already exists" << '\n';
     }
 }
 void Galaxy::resize(){
@@ -41,6 +41,7 @@ std::ostream& operator<<(std::ostream& out, const Galaxy& other){
 }
 Galaxy& Galaxy::operator=(const Galaxy& other){
     if(this != &other){
+        free();
         copy(other);
     }
     return *this;
