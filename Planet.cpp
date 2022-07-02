@@ -64,7 +64,7 @@ void Planet::create_jedi(const char *namePlanet, const Jedi &Newjedi)
         bool exists = false;
         for (int i = 0; i < size; i++)
         {
-            if (!strcmp(jedies[i].getName(),Newjedi.getName()))
+            if (!strcmp(jedies[i].getName(), Newjedi.getName()))
             {
                 exists = true;
             }
@@ -84,10 +84,9 @@ void Planet::create_jedi(const char *namePlanet, const Jedi &Newjedi)
         }
         else
         {
-        std::cout << Newjedi.getName() << " already exists" << '\n';
+            std::cout << Newjedi.getName() << " already exists" << '\n';
         }
     }
-
 }
 void Planet::removeJedi(const char *namePlanet, const Jedi &Newjedi)
 {
@@ -97,25 +96,25 @@ void Planet::removeJedi(const char *namePlanet, const Jedi &Newjedi)
         bool exists = false;
         for (int i = 0; i < size; i++)
         {
-            if (!strcmp(jedies[i].getName(),Newjedi.getName()))
+            if (!strcmp(jedies[i].getName(), Newjedi.getName()))
             {
                 exists = true;
+                std::cout << Newjedi.getName() << " was removed successfully" << '\n';
+                this->jedies[i] = jedies[size-1];
+                size--;
+
             }
         }
-        if(exists){
+        if (!exists)
+        {
+            std::cout << Newjedi.getName() << " doesn't exists on this planet" << '\n';
             // delete[] this->namePlanet;
             // this->namePlanet = new char[strlen(namePlanet) + 1];
-            std::cout << Newjedi.getName() << " was removed successfully" << '\n';
-            size--;
-        }
-        else
-        {
-        std::cout << Newjedi.getName() << " doesn't exists on this planet" << '\n';
         }
     }
-    
 }
-void Planet::demote_jedi(const char* jediName, const double multiplier){
+void Planet::demote_jedi(const char *jediName, const double multiplier)
+{
     if (multiplier < 0)
     {
         std::cout << "multiplier must be a positive number";
@@ -247,21 +246,27 @@ char *Planet::getName() const
     return this->namePlanet;
 }
 
-void Planet::getStrongestJedi() const{
+void Planet::getStrongestJedi() const
+{
     double biggestPower = 0;
     char buffer[100];
-    for(int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++)
+    {
         double diff;
-        if(jedies[i].getPower() > 0){
+        if (jedies[i].getPower() > 0)
+        {
             diff = biggestPower - jedies[i].getPower();
         }
-        else{
+        else
+        {
             diff = biggestPower + jedies[i].getPower();
         }
-        if(diff < __DBL_EPSILON__){
+        if (diff < __DBL_EPSILON__)
+        {
             biggestPower = jedies[i].getPower();
             strcpy(buffer, jedies[i].getName());
         }
     }
-    std::cout << '\n' << buffer << " is the strongest Jedi" << '\n';
+    std::cout << '\n'
+              << buffer << " is the strongest Jedi" << '\n';
 }

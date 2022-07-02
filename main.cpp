@@ -20,7 +20,7 @@ int main(){
     //planet.create_jedi("asd", jedi2);
     //planet1.create_jedi("asd", jedi1);
     //planet.create_jedi("dfsf", jedi2);
-    //planet.removeJedi("asd", jedi1);
+    planet.removeJedi("asd", jedi1);
     //planet.promote_jedi("bonk", 10);
     //std::cin >> planet;
     // std::cout << planet;

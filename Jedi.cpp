@@ -33,7 +33,6 @@ Jedi& Jedi::operator=(const Jedi& other){
 Jedi::~Jedi(){
     free();
 }
-
 void Jedi::free(){
     delete[] name;
     delete[] saberColor;
